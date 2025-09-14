@@ -4,12 +4,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Data
 @Document(collection = "input_data")
+@CompoundIndexes({
+        @CompoundIndex(name = "meter_date_idx", def = "{'meterId': 1, 'dateTime': 1}", unique = true)
+})
 public class InputData {
 
     public InputData() {
